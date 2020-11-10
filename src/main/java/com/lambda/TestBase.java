@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -37,6 +38,21 @@ public class TestBase {
     @Test
     public void runable(){
         new Thread( () -> System.out.println("无参，无返回值") ).start();
+    }
+
+    /**
+     * Lambda 隐式返回
+     *      当方法体只有一句语句时，可以省略掉return 与大括号
+     */
+    @Test
+    public void implicitReturn(){
+        Supplier<Integer> su = ()-> {
+            return new Random().nextInt(100);
+        };
+        System.out.println("显示返回："+su.get());
+
+        su = ()->new Random().nextInt(100);
+        System.out.println("隐式返回："+su.get());
     }
 
     /**
