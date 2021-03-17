@@ -1,4 +1,4 @@
-package com.concurrent.common;
+package com.concurrent.a_common;
 
 import java.util.ArrayList;
 import java.util.concurrent.*;
