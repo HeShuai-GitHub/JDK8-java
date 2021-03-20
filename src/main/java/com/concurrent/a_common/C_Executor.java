@@ -66,9 +66,9 @@ public class C_Executor {
         /**
          * 以上三种创建线程的方式，单一、可变、定长都有一定问题，
          * 原因是FixedThreadPool和SingleThreadExecutor底层
-         * 都是用LinkedBlockingQueue实现的，这个队列最大长度为Integer.MAX_VALUE，容易导致OOM。
+         * 都是用LinkedBlockingQueue实现的，这个队列最大长度为Integer.MAX_VALUE，容易在程序员不了解的情况下导致OOM。
          * OOM： out of memory，内存超出
-         *  所以一般情况下都会采用自定义线程池的方式来定义
+         *  所以一般情况下都会采用自定义线程池的方式来定义，这样可以了解线程池的每一个参数的变化。
          * @param args
          */
         public static void main(String[] args) {
@@ -77,11 +77,11 @@ public class C_Executor {
              * 2、maximumPoolSize能容纳的最大线程数
              * 3、keepAliveTime空闲线程存活时间
              * 4、unit 存活的时间单位
-             * 5、workQueue 存放提交但未执行任务的队列
-             * 6、threadFactory 创建线程的工厂类
+             * 5、workQueue 存放提交但未执行任务的队列容器
+             * 6、threadFactory 创建线程的工厂容器
              * 7、handler 等待队列满后的拒绝策略
              */
-            ExecutorService executor = new ThreadPoolExecutor(10,20,200L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>(),new ThreadPoolExecutor.AbortPolicy());
+            ExecutorService executor = new ThreadPoolExecutor(10,20,200L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>(),Executors.defaultThreadFactory(),new ThreadPoolExecutor.AbortPolicy());
             for(int i=0;i<5;i++){
                 executor.execute(new A_RunTask());
             }
