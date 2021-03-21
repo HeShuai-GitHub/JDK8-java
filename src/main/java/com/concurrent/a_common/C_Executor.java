@@ -18,6 +18,8 @@ public class C_Executor {
     static class Inner_Cached{
         /**
          * 动态创建线程，Executors.newCachedThreadPool()将为每一个任务都创建一个线程。
+         * 探究一下newCachedThreadPool()的源码，首先需要陈诉的是，这个工具方法最后是使用ThreadPoolExecutor来实现线程池的，那么它是如何实现动态加载的呢，
+         * 其实是因为它将核心线程数设置成了0，将最大线程数设置成了Integer.MAX_VALUE，那么就可以实现一个伪动态的效果了，因为这个线程数是不能超过Integer.MAX_VALUE的。
          */
         public static void main(String []arg){
             ExecutorService exec= Executors.newCachedThreadPool();
@@ -65,7 +67,7 @@ public class C_Executor {
     static class Inner_Customized{
         /**
          * 以上三种创建线程的方式，单一、可变、定长都有一定问题，
-         * 原因是FixedThreadPool和SingleThreadExecutor底层
+         * 原因是FixedThreadPool、SingleThreadExecutor、newCachedThreadPool底层
          * 都是用LinkedBlockingQueue实现的，这个队列最大长度为Integer.MAX_VALUE，容易在程序员不了解的情况下导致OOM。
          * OOM： out of memory，内存超出
          *  所以一般情况下都会采用自定义线程池的方式来定义，这样可以了解线程池的每一个参数的变化。
