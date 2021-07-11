@@ -1,6 +1,5 @@
 package com.concurrent.d_threadCooperation;
 
-import com.sun.org.apache.xpath.internal.WhitespaceStrippingElementMatcher;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
